@@ -18,3 +18,7 @@ body::-webkit-scrollbar-thumb {
     background-color: #e0e0e0;
     border-radius: 20px;
 }
+
+.ant-list-split .ant-list-item {
+    border: 1px solid #d9d9d9;
+}

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import _ from 'lodash';
 
 import { SearchOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Input, Spin, List, Empty } from 'antd/es';
 
 import { IAccountData, useGetAccountListQuery } from './playerInfoApi';
+
+import './PlayerInfo.css';
 
 const PlayerInfo: React.FC = () => {
     const navigate = useNavigate();
@@ -16,11 +18,11 @@ const PlayerInfo: React.FC = () => {
 
     const nickNameList = _.map(accountList?.data, (account: IAccountData) => (
         <List.Item
+            className="player-info__search-item"
             onClick={() => navigate(`/search-player/${account.account_id}`)}
             key={account.account_id}
-            style={{ cursor: 'pointer' }}
         >
-            {account.nickname}
+            <a>{account.nickname}</a>
         </List.Item>
     ));
 
@@ -35,7 +37,7 @@ const PlayerInfo: React.FC = () => {
             />
             <Spin spinning={isFetching}>
                 <List bordered>
-                    {nickNameList.length ? nickNameList : (
+                    {nickNameList.length && searchValue.length > 2 ? nickNameList : (
                         <Empty
                             description={<b>Нет совпадений или введено менее 3-х символов</b>}
                             style={{ padding: '8px', fontSize: '16px' }}
