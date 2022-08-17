@@ -39,7 +39,7 @@ const PlayerInfo: React.FC = () => {
                 <List bordered>
                     {nickNameList.length && searchValue.length > 2 ? nickNameList : (
                         <Empty
-                            description={<b>Нет совпадений или введено менее 3-х символов</b>}
+                            description={<b>Нет совпадений или введено менее 3-х символов. Регистр при поиске не учитывается</b>}
                             style={{ padding: '8px', fontSize: '16px' }}
                         />)}
                 </List>
