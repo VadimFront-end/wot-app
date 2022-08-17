@@ -6,9 +6,10 @@ import { useGetTankInfoQuery } from '../../../../TanksInfo/tanksInfoApi';
 
 interface IProps {
     tankId: number,
+    withName?: boolean
 }
 
-const TankCell: React.FC<IProps> = ({ tankId }) => {
+const TankCell: React.FC<IProps> = ({ tankId, withName = true }) => {
     const { data: tankInfo, isFetching } = useGetTankInfoQuery({ tank_id: tankId }, { skip: !tankId });
 
     const { images, name } = tankInfo?.data[tankId] || {};
@@ -16,7 +17,7 @@ const TankCell: React.FC<IProps> = ({ tankId }) => {
     return (
         <Spin spinning={isFetching}>
             <img src={images?.big_icon} alt="Танк" />
-            <div style={{ textAlign: 'center' }}>{name}</div>
+            {withName && <div style={{ textAlign: 'center' }}>{name}</div>}
         </Spin>
     );
 };

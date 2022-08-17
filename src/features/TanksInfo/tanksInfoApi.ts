@@ -15,6 +15,18 @@ interface ITankData {
     data: { [key: string]: { [key: string]: string | number } | any }
 }
 
+interface ITanksListData {
+    status: string,
+    meta: {
+        count: number,
+        limit: number,
+        page: number,
+        page_total: number,
+        total: number,
+    },
+    data: { [key: number]: { [key: string]: string | number } | any }
+}
+
 export const tanksInfoApi = createApi({
     reducerPath: 'tanksList',
     baseQuery,
@@ -23,9 +35,14 @@ export const tanksInfoApi = createApi({
             query: data => `encyclopedia/vehicles/?${queryString.stringify(dataWithAccountId(data))}`,
             keepUnusedDataFor: 0,
         }),
+        getTanksList: build.query<ITanksListData, { limit?: number, page_no: number }>({
+            query: data => `encyclopedia/vehicles/?${queryString.stringify(dataWithAccountId(data))}`,
+            keepUnusedDataFor: 0,
+        }),
     }),
 });
 
 export const {
     useGetTankInfoQuery,
+    useGetTanksListQuery,
 } = tanksInfoApi;

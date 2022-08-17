@@ -26,6 +26,13 @@ const PlayerInfo: React.FC = () => {
         </List.Item>
     ));
 
+    const descriptionForEmpty = (
+        <b>
+            <div>Нет совпадений или введено менее 3-х символов.</div>
+            <div>Регистр при поиске не учитывается!</div>
+        </b>
+    );
+
     return (
         <div>
             <Input
@@ -38,7 +45,7 @@ const PlayerInfo: React.FC = () => {
             <Spin spinning={isFetching}>
                 {nickNameList.length && searchValue.length > 2 ? <List bordered>{nickNameList}</List> : (
                     <Empty
-                        description={<b>Нет совпадений или введено менее 3-х символов. Регистр при поиске не учитывается</b>}
+                        description={descriptionForEmpty}
                         style={{ padding: '8px', fontSize: '16px' }}
                     />)
                 }
