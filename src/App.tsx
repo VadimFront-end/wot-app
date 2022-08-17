@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useRoutes, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useRoutes, useLocation, useNavigate, Link } from 'react-router-dom';
 import _ from 'lodash';
 
-import { SearchOutlined, TableOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
-import { Layout, Menu, Button, Result } from 'antd/es';
+import { SearchOutlined, TableOutlined } from '@ant-design/icons';
+import { Layout, Menu, Result } from 'antd/es';
 
 import PlayerInfo from './features/PlayerInfo/PlayerInfo';
 import TanksInfo from './features/TanksInfo/TabksInfo';
 import PlayerCard from './features/PlayerInfo/components/PlayerCard';
 import { useAppSelector } from './app/hooks';
+import logo from './imgs/main.png';
 
 import './App.css';
+import {Tooltip} from "antd";
 
 const { Content, Sider, Header } = Layout;
 
@@ -52,9 +54,6 @@ const App: React.FC = () => {
         }
     }, []);
 
-
-    const [ collapsed, setCollapsed ] = useState<boolean>(false);
-
     const menuItems = [
         { label: `Статистика игрока ${nickname}`, key: '/search-player/', hidden: true },
         { label: 'Поиск игрока', key: '/search-player', icon: <SearchOutlined /> },
@@ -64,16 +63,16 @@ const App: React.FC = () => {
     return (
         <Layout className="main-layout" hasSider>
             <Sider
-                collapsed={collapsed}
-                collapsedWidth={50}
+                collapsible
+                collapsedWidth={64}
             >
-                <Button
-                    type="primary"
-                    onClick={() => setCollapsed(prevState => !prevState)}
-                    style={{ margin: '4px auto', display: 'block' }}
-                >
-                    {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                </Button>
+                <Link to="/search-player">
+                    <Tooltip title="На главную" placement="right">
+                        <div style={{ background: '#f0f2f5' }}>
+                            <img src={logo} alt="Лого" width={64} height={64} style={{ margin: 'auto', display: 'block'}}/>
+                        </div>
+                    </Tooltip>
+                </Link>
                 <Menu
                     selectedKeys={[ location.pathname ]}
                     onClick={({ key }) => navigate(key)}
