@@ -16,8 +16,8 @@ const TankCell: React.FC<IProps> = ({ tankId, withName = true }) => {
 
     return (
         <Spin spinning={isFetching}>
-            <img src={images?.big_icon} alt="Танк" />
-            {withName && <div style={{ textAlign: 'center' }}>{name}</div>}
+            <img src={images?.big_icon} alt="Танк" style={{ margin: 'auto', display: 'block' }} />
+            {withName && <div style={{ textAlign: 'center' }}><b>{name}</b></div>}
         </Spin>
     );
 };

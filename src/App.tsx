@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { useRoutes, useLocation, useNavigate, Link } from 'react-router-dom';
 import _ from 'lodash';
 
-import { SearchOutlined, TableOutlined } from '@ant-design/icons';
-import { Layout, Menu, Result } from 'antd/es';
+import { SearchOutlined, TableOutlined, AreaChartOutlined } from '@ant-design/icons';
+import { Layout, Menu, Result, Tooltip } from 'antd/es';
 
 import PlayerInfo from './features/PlayerInfo/PlayerInfo';
 import TanksInfo from './features/TanksInfo/TabksInfo';
 import PlayerCard from './features/PlayerInfo/components/PlayerCard';
+import AchievementsInfo from './features/AchievementsInfo/AchievementsInfo';
 import { useAppSelector } from './app/hooks';
 import logo from './imgs/main.png';
 
 import './App.css';
-import {Tooltip} from "antd";
 
 const { Content, Sider, Header } = Layout;
 
@@ -37,6 +37,10 @@ const routes = [
         element: <TanksInfo />,
     },
     {
+        path: '/achievements',
+        element: <AchievementsInfo />
+    },
+    {
         path: '*',
         element: emptyResult,
     },
@@ -58,6 +62,7 @@ const App: React.FC = () => {
         { label: `Статистика игрока ${nickname}`, key: '/search-player/', hidden: true },
         { label: 'Поиск игрока', key: '/search-player', icon: <SearchOutlined /> },
         { label: 'Техника', key: '/tanks', icon: <TableOutlined /> },
+        { label: 'Достижения', key: '/achievements', icon: <AreaChartOutlined /> },
     ];
 
     return (
