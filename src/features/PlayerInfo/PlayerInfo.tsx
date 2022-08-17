@@ -36,13 +36,12 @@ const PlayerInfo: React.FC = () => {
                 onChange={e => setSearchValue(e.target.value)}
             />
             <Spin spinning={isFetching}>
-                <List bordered>
-                    {nickNameList.length && searchValue.length > 2 ? nickNameList : (
-                        <Empty
-                            description={<b>Нет совпадений или введено менее 3-х символов. Регистр при поиске не учитывается</b>}
-                            style={{ padding: '8px', fontSize: '16px' }}
-                        />)}
-                </List>
+                {nickNameList.length && searchValue.length > 2 ? <List bordered>{nickNameList}</List> : (
+                    <Empty
+                        description={<b>Нет совпадений или введено менее 3-х символов. Регистр при поиске не учитывается</b>}
+                        style={{ padding: '8px', fontSize: '16px' }}
+                    />)
+                }
             </Spin>
         </div>
     );
