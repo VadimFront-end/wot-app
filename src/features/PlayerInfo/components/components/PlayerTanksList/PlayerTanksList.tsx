@@ -7,7 +7,7 @@ import TankCell from '../TankCell/TankCell';
 import { useGetPlayerTanksListQuery } from "../../../playerInfoApi";
 
 interface IProps {
-    playedId: string,
+    playerId: string,
 }
 
 const columns = [
@@ -35,10 +35,10 @@ const columns = [
     },
 ];
 
-const TanksInfo: React.FC<IProps> = ({ playedId }) => {
-    const { data: TanksInfoList, isFetching } = useGetPlayerTanksListQuery({ account_id: playedId });
+const TanksInfo: React.FC<IProps> = ({ playerId }) => {
+    const { data: TanksInfoList, isFetching } = useGetPlayerTanksListQuery({ account_id: playerId });
 
-    const dataSource = _.map(TanksInfoList?.data?.[playedId], ({ mark_of_mastery, statistics, tank_id }) => ({
+    const dataSource = _.map(TanksInfoList?.data?.[playerId], ({ mark_of_mastery, statistics, tank_id }) => ({
         battles: statistics.battles,
         wins: statistics.wins,
         master: mark_of_mastery,
