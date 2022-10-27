@@ -4,7 +4,8 @@ import _ from 'lodash';
 import { Table } from 'antd/es';
 
 import TankCell from '../TankCell/TankCell';
-import { useGetPlayerTanksListQuery } from "../../../playerInfoApi";
+import { useGetPlayerTanksListQuery } from '../../../playerInfoApi';
+import { getPrettyNumber } from '../../../../../app/helpers';
 
 interface IProps {
     playerId: string,
@@ -28,21 +29,22 @@ const columns = [
         key: 'statistic',
         render: (text: string, { battles, wins }: Record<string, number>) => (
             <>
-                <div>Боев: <b>{battles}</b></div>
-                <div>Побед: <b>{wins} ({_.isNaN(wins / battles * 100) ? '0%' : (wins / battles * 100).toFixed(2)}%)</b></div>
+                <div>Боев: <b>{getPrettyNumber(battles.toString())}</b></div>
+                <div>Побед: <b>{getPrettyNumber(wins.toString())} ({_.isNaN(wins / battles * 100) ? '0%' : (wins / battles * 100).toFixed(2)}%)</b></div>
             </>
         ),
     },
 ];
 
 const TanksInfo: React.FC<IProps> = ({ playerId }) => {
-    const { data: TanksInfoList, isFetching } = useGetPlayerTanksListQuery({ account_id: playerId });
+    const { data: tanksInfoList, isFetching } = useGetPlayerTanksListQuery({ account_id: playerId });
 
-    const dataSource = _.map(TanksInfoList?.data?.[playerId], ({ mark_of_mastery, statistics, tank_id }) => ({
+    const dataSource = _.map(tanksInfoList?.data?.[playerId], ({ mark_of_mastery, statistics, tank_id }) => ({
         battles: statistics.battles,
         wins: statistics.wins,
         master: mark_of_mastery,
         tank_id,
+        key: tank_id,
     }));
 
     return (

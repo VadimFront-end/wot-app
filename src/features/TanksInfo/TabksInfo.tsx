@@ -31,7 +31,7 @@ const TanksInfo: React.FC = () => {
 
     const { data: tanksList, isFetching } = useGetTanksListQuery({ limit, page_no: current });
 
-    const dataSource = _.map(tanksList?.data, ({ name, description, images, tank_id }) => ({ name, description, image: images.big_icon, tank_id }));
+    const dataSource = _.map(tanksList?.data, ({ name, description, images, tank_id }) => ({ name, description, image: images.big_icon, tank_id, key: tank_id }));
 
     const onChangeTable = ({ pageSize = 10, current = 1 }) => {
         setPaginationConfig({ pageSize, current: pageSize !== limit ? 1 : current });

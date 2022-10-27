@@ -23,6 +23,7 @@ const emptyResult = (
         subTitle="Страница не найдена"
     />
 );
+
 const routes = [
     {
         path: '/search-player',
@@ -65,6 +66,8 @@ const App: React.FC = () => {
         { label: 'Достижения', key: '/achievements', icon: <AreaChartOutlined /> },
     ];
 
+    const selectedKeys = [ location.pathname.indexOf('/', 1) === -1 ? location.pathname : location.pathname.substring(0, location.pathname.indexOf('/', 1)) ];
+
     return (
         <Layout className="main-layout" hasSider>
             <Sider
@@ -79,7 +82,7 @@ const App: React.FC = () => {
                     </Tooltip>
                 </Link>
                 <Menu
-                    selectedKeys={[ location.pathname ]}
+                    selectedKeys={selectedKeys}
                     onClick={({ key }) => navigate(key)}
                     theme="dark"
                     items={menuItems}

@@ -8,6 +8,7 @@ import TankCell from '../TankCell/TankCell';
 import { useGetAccountInfoQuery } from '../../../playerInfoApi';
 import { getAccountName } from '../../../storePlayerInfo';
 import { useAppDispatch } from '../../../../../app/hooks';
+import { getPrettyNumber } from '../../../../../app/helpers';
 
 interface IProps {
     playerId: string,
@@ -17,7 +18,7 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
     const dispatch = useAppDispatch();
     const { data: accountInfo, isFetching } = useGetAccountInfoQuery({ account_id: playerId || '' }, { skip: !playerId });
 
-    const { all } = accountInfo?.data?.[playerId || 0]?.statistics || {};
+    const { all } = accountInfo?.data?.[playerId || 0]?.statistics || {}
     const { battles, wins, losses, draws } = all || {};
 
     useEffect(() => {
@@ -32,16 +33,16 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
             label={item}
             key={key}
         >
-            <b>{_.includes(key, 'tank_id') ? <TankCell tankId={all[key]} /> : all[key]}</b>
+            <b>{_.includes(key, 'tank_id') ? <TankCell tankId={all[key]} /> : getPrettyNumber(all[key].toString())}</b>
         </Descriptions.Item>
     )), [ all ]);
 
     const statisticTooltipTitle = (
         <>
-            <div>Подед: {wins}</div>
-            <div>Поражений: {losses}</div>
-            <div>Ничьих: {draws}</div>
-            <div>Всего: {battles}</div>
+            <div>Подед: {getPrettyNumber(wins?.toString())}</div>
+            <div>Поражений: {getPrettyNumber(losses?.toString())}</div>
+            <div>Ничьих: {getPrettyNumber(draws?.toString())}</div>
+            <div>Всего: {getPrettyNumber(battles?.toString())}</div>
         </>
     );
 
