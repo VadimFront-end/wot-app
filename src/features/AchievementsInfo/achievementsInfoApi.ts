@@ -1,14 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
-import queryString from 'query-string';
 
 import { baseQuery, dataWithAccountId } from '../../commonForApi';
 
 interface IAchievementsData {
-    status: string,
+    status: string;
     meta: {
-        count: number,
+        count: number;
     },
-    data: { [key: number]: { [key: string]: string | boolean | number }}
+    data: Record<number, Record<string, string | boolean | number>>;
 }
 
 export const achievementsInfoApi = createApi({
@@ -16,12 +15,13 @@ export const achievementsInfoApi = createApi({
     baseQuery,
     endpoints: build => ({
         getAchievementsInfo: build.query<IAchievementsData, {}>({
-            query: data => `encyclopedia/achievements/?${queryString.stringify(dataWithAccountId(data))}`,
+            query: data => ({
+                url: 'encyclopedia/achievements/',
+                params: dataWithAccountId(data),
+            }),
             keepUnusedDataFor: 0,
         }),
     }),
 });
 
-export const {
-    useGetAchievementsInfoQuery,
-} = achievementsInfoApi;
+export const { useGetAchievementsInfoQuery } = achievementsInfoApi;

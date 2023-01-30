@@ -1,9 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { Table } from 'antd/es';
-
 import { useGetAchievementsInfoQuery } from './achievementsInfoApi';
+import { useTable } from '../../app/castomHooks';
 
 const columns = [
     {
@@ -31,15 +30,7 @@ const AchievementsInfo: React.FC = () => {
 
     const dataSource = _.map(achievementsInfo?.data, ({ name_i18n, condition, image_big, name }) => ({ name: name_i18n, condition, image: image_big, key: name }));
 
-    return (
-        <Table
-            bordered
-            loading={isFetching}
-            dataSource={dataSource}
-            columns={columns}
-            pagination={{ pageSizeOptions: [ 10, 25, 50 ] }}
-        />
-    );
+    return useTable({ isFetching, dataSource, columns });
 };
 
 export default AchievementsInfo;

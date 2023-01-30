@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 
-import { Table } from 'antd/es';
-
 import { useGetTanksListQuery } from './tanksInfoApi';
 import TankCell from '../PlayerInfo/components/components/TankCell/TankCell';
+import { useTable } from '../../app/castomHooks';
 
 const columns = [
     {
@@ -37,16 +36,7 @@ const TanksInfo: React.FC = () => {
         setPaginationConfig({ pageSize, current: pageSize !== limit ? 1 : current });
     };
 
-    return (
-        <Table
-            bordered
-            loading={isFetching}
-            dataSource={dataSource}
-            columns={columns}
-            pagination={{ ...paginationConfig, total: tanksList?.meta.total || 0, pageSizeOptions: [ 10, 25, 50 ] }}
-            onChange={onChangeTable}
-        />
-    );
+    return useTable({ isFetching, dataSource, columns, onChangeTable, paginationConfig: { ...paginationConfig, total: tanksList?.meta.total || 0 } });
 };
 
 export default TanksInfo;

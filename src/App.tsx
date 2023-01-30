@@ -7,6 +7,7 @@ import { Layout, Menu, Result, Tooltip } from 'antd/es';
 
 import PlayerInfo from './features/PlayerInfo/PlayerInfo';
 import TanksInfo from './features/TanksInfo/TabksInfo';
+import TanksCard from './features/TankCard/TankCard';
 import PlayerCard from './features/PlayerInfo/components/PlayerCard';
 import AchievementsInfo from './features/AchievementsInfo/AchievementsInfo';
 import { useAppSelector } from './app/hooks';
@@ -38,6 +39,10 @@ const routes = [
         element: <TanksInfo />,
     },
     {
+        path: '/tanks/:id',
+        element: <TanksCard />,
+    },
+    {
         path: '/achievements',
         element: <AchievementsInfo />
     },
@@ -52,6 +57,7 @@ const App: React.FC = () => {
     const navigate = useNavigate();
 
     const nickname = useAppSelector(state => state.playerInfo.nickname);
+    const tankName = useAppSelector(store => store.playerInfo.selectedTankName);
 
     useEffect(() => {
         if (location.pathname === '/') {
@@ -62,6 +68,7 @@ const App: React.FC = () => {
     const menuItems = [
         { label: `Статистика игрока ${nickname}`, key: '/search-player/', hidden: true },
         { label: 'Поиск игрока', key: '/search-player', icon: <SearchOutlined /> },
+        { label: `Описание танка ${tankName}`, key: '/tanks/', icon: <TableOutlined />, hidden: true },
         { label: 'Техника', key: '/tanks', icon: <TableOutlined /> },
         { label: 'Достижения', key: '/achievements', icon: <AreaChartOutlined /> },
     ];

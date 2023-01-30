@@ -1,24 +1,25 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
+import { ConfigProvider } from 'antd';
+import ruRu from 'antd/lib/locale/ru_RU';
 import 'antd/dist/antd.css';
 
 import { store } from './app/store';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import './index.css';
-import {BrowserRouter} from "react-router-dom";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </BrowserRouter>
+    <ConfigProvider locale={ruRu}>
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </BrowserRouter>
+    </ConfigProvider>
 );
-
-reportWebVitals();

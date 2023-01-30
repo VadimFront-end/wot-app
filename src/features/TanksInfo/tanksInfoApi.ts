@@ -1,48 +1,31 @@
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
-import queryString from 'query-string';
 
 import { baseQuery, dataWithAccountId } from '../../commonForApi';
 
-interface ITankData {
-    status: string,
-    meta: {
-        count: number,
-        page_total: number,
-        total: number,
-        limit: number,
-        page: number,
-    },
-    data: { [key: string]: { [key: string]: string | number } | any }
-}
-
 interface ITanksListData {
-    status: string,
+    status: string;
     meta: {
-        count: number,
-        limit: number,
-        page: number,
-        page_total: number,
-        total: number,
+        count: number;
+        limit: number;
+        page: number;
+        page_total: number;
+        total: number;
     },
-    data: { [key: number]: { [key: string]: string | number } | any }
+    data: Record<string, Record<string, string | number> | any>;
 }
 
 export const tanksInfoApi = createApi({
     reducerPath: 'tanksList',
     baseQuery,
     endpoints: build => ({
-        getTankInfo: build.query<ITankData, { tank_id: number }>({
-            query: data => `encyclopedia/vehicles/?${queryString.stringify(dataWithAccountId(data))}`,
-            keepUnusedDataFor: 0,
-        }),
         getTanksList: build.query<ITanksListData, { limit?: number, page_no: number }>({
-            query: data => `encyclopedia/vehicles/?${queryString.stringify(dataWithAccountId(data))}`,
+            query: data => ({
+                url: 'encyclopedia/vehicles/',
+                params: dataWithAccountId(data),
+            }),
             keepUnusedDataFor: 0,
         }),
     }),
 });
 
-export const {
-    useGetTankInfoQuery,
-    useGetTanksListQuery,
-} = tanksInfoApi;
+export const { useGetTanksListQuery } = tanksInfoApi;

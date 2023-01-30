@@ -1,11 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { Table } from 'antd/es';
-
 import TankCell from '../TankCell/TankCell';
 import { useGetPlayerTanksListQuery } from '../../../playerInfoApi';
 import { getPrettyNumber } from '../../../../../app/helpers';
+import { useTable } from '../../../../../app/castomHooks';
 
 interface IProps {
     playerId: string,
@@ -47,15 +46,7 @@ const TanksInfo: React.FC<IProps> = ({ playerId }) => {
         key: tank_id,
     }));
 
-    return (
-        <Table
-            bordered
-            loading={isFetching}
-            dataSource={dataSource}
-            columns={columns}
-            pagination={{ pageSizeOptions: [ 10, 25, 50 ] }}
-        />
-    );
+    return useTable({ isFetching, dataSource, columns });
 };
 
 export default TanksInfo;

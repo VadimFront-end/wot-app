@@ -1,5 +1,4 @@
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
-import queryString from 'query-string';
 
 import { baseQuery, dataWithAccountId } from '../../commonForApi';
 
@@ -46,15 +45,24 @@ export const accountListApi = createApi({
     baseQuery,
     endpoints: build => ({
         getAccountList: build.query<IDataPlayers, { search: string }>({
-            query: data => `/account/list/?${queryString.stringify(dataWithAccountId(data))}`,
+            query: data => ({
+                url: '/account/list/',
+                params: dataWithAccountId(data),
+            }),
             keepUnusedDataFor: 0,
         }),
         getAccountInfo: build.query<IDataPlayer, { account_id: string }>({
-            query: data => `/account/info/?${queryString.stringify(dataWithAccountId(data))}`,
+            query: data => ({
+                url: '/account/info/',
+                params: dataWithAccountId(data),
+            }),
             keepUnusedDataFor: 0,
         }),
         getPlayerTanksList: build.query<ITanksListData, { account_id: string }>({
-            query: data => `/account/tanks/?${queryString.stringify(dataWithAccountId(data))}`,
+            query: data => ({
+                url: '/account/tanks/',
+                params: dataWithAccountId(data),
+            }),
             keepUnusedDataFor: 0,
         }),
     }),
