@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/wot-app/static/css/main.ebe7eb01.css",
+    "main.js": "/wot-app/static/js/main.15f78327.js",
+    "static/media/main.png": "/wot-app/static/media/main.ae6bd3db485375c99793.png",
+    "index.html": "/wot-app/index.html",
+    "main.ebe7eb01.css.map": "/wot-app/static/css/main.ebe7eb01.css.map",
+    "main.15f78327.js.map": "/wot-app/static/js/main.15f78327.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ebe7eb01.css",
+    "static/js/main.15f78327.js"
+  ]
+}
