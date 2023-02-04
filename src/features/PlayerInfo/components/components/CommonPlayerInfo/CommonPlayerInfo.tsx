@@ -17,7 +17,7 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
     const dispatch = useAppDispatch();
     const { data: accountInfo, isFetching } = useGetAccountInfoQuery({ account_id: playerId || '' }, { skip: !playerId });
 
-    const { all } = accountInfo?.data?.[playerId || 0]?.statistics || {}
+    const { all } = accountInfo?.data?.[playerId || 0]?.statistics || {};
     const { battles, wins, losses, draws } = all || {};
 
     useEffect(() => {
@@ -65,7 +65,7 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
                 {all ? accountInfoRender() : null}
             </Descriptions>
         </Spin>
-    )
+    );
 };
 
 export default CommonPlayerInfo;

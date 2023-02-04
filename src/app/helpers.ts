@@ -5,5 +5,5 @@ export const getPrettyNumber = (number = '', result = '', index = number.length)
 
     const newIndex = !result && !Number.isInteger(+number) ? number.indexOf('.') : index;
 
-    return getPrettyNumber(number, number.substring(newIndex - 3, newIndex) + ' ' + result, newIndex - 3)
+    return getPrettyNumber(number, number.substring(newIndex - 3, newIndex) + ' ' + result, newIndex - 3);
 };

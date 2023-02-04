@@ -51,6 +51,6 @@ const PlayerInfo: React.FC = () => {
             </Spin>
         </div>
     );
-}
+};
 
 export default PlayerInfo;

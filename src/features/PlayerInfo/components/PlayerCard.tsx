@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 
 import { Tabs } from 'antd/es';
 
-import PlayerTanksList from "./components/PlayerTanksList/PlayerTanksList";
-import CommonPlayerInfo from "./components/CommonPlayerInfo/CommonPlayerInfo";
+import PlayerTanksList from './components/PlayerTanksList/PlayerTanksList';
+import CommonPlayerInfo from './components/CommonPlayerInfo/CommonPlayerInfo';
 
 const { TabPane } = Tabs;
 
