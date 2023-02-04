@@ -6,6 +6,13 @@ import { tanksInfoApi } from '../features/TanksInfo/tanksInfoApi';
 import { tankCardApi } from '../features/TankCard/tanksCardApi';
 import { achievementsInfoApi } from '../features/AchievementsInfo/achievementsInfoApi';
 
+const Middlewares = [
+    accountListApi.middleware,
+    tanksInfoApi.middleware,
+    tankCardApi.middleware,
+    achievementsInfoApi.middleware,
+];
+
 export const store = configureStore({
     reducer: {
         [accountListApi.reducerPath]: accountListApi.reducer,
@@ -14,7 +21,7 @@ export const store = configureStore({
         [achievementsInfoApi.reducerPath]: achievementsInfoApi.reducer,
         playerInfo: playerInfoReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(accountListApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(...Middlewares),
 });
 
 export type AppDispatch = typeof store.dispatch;

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useRoutes, useLocation, useNavigate, Link } from 'react-router-dom';
-import _ from 'lodash';
 
 import { SearchOutlined, TableOutlined, AreaChartOutlined } from '@ant-design/icons';
 import { Layout, Menu, Result, Tooltip } from 'antd/es';
@@ -97,7 +96,7 @@ const App: React.FC = () => {
             </Sider>
             <Layout>
                 <Header>
-                    <h1>{_.find(menuItems, item => _.includes(location.pathname, item.key))?.label}</h1>
+                    <h1>{menuItems.find(item => location.pathname?.includes(item.key))?.label}</h1>
                 </Header>
                 <Content>
                     {useRoutes(routes)}

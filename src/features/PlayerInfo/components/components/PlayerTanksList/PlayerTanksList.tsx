@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 
 import TankCell from '../TankCell/TankCell';
 import { useGetPlayerTanksListQuery } from '../../../playerInfoApi';
@@ -29,7 +28,7 @@ const columns = [
         render: (text: string, { battles, wins }: Record<string, number>) => (
             <>
                 <div>Боев: <b>{getPrettyNumber(battles.toString())}</b></div>
-                <div>Побед: <b>{getPrettyNumber(wins.toString())} ({_.isNaN(wins / battles * 100) ? '0%' : (wins / battles * 100).toFixed(2)}%)</b></div>
+                <div>Побед: <b>{getPrettyNumber(wins.toString())} ({Number.isNaN(wins / battles * 100) ? '0%' : (wins / battles * 100).toFixed(2)}%)</b></div>
             </>
         ),
     },
@@ -38,7 +37,7 @@ const columns = [
 const TanksInfo: React.FC<IProps> = ({ playerId }) => {
     const { data: tanksInfoList, isFetching } = useGetPlayerTanksListQuery({ account_id: playerId });
 
-    const dataSource = _.map(tanksInfoList?.data?.[playerId], ({ mark_of_mastery, statistics, tank_id }) => ({
+    const dataSource = Object.values(tanksInfoList?.data?.[playerId] || {}).map(({ mark_of_mastery, statistics, tank_id }) => ({
         battles: statistics.battles,
         wins: statistics.wins,
         master: mark_of_mastery,

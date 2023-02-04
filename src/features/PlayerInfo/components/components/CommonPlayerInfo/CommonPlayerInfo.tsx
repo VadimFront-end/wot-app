@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-import _ from 'lodash';
 
 import { Descriptions, Progress, Spin, Tooltip } from 'antd/es';
 
@@ -27,13 +26,13 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
         }
     }, [ accountInfo ]);
 
-    const accountInfoRender = useCallback(() => _.map(descriptionPattern, (item, key) => (
+    const accountInfoRender = useCallback(() => Object.entries(descriptionPattern).map(([ key, item ]) => (
         <Descriptions.Item
             contentStyle={{ whiteSpace: 'nowrap', background: 'white' }}
             label={item}
             key={key}
         >
-            <b>{_.includes(key, 'tank_id') ? <TankCell tankId={all[key]} /> : getPrettyNumber(all[key].toString())}</b>
+            <b>{key.includes('tank_id') ? <TankCell tankId={all[key]} /> : getPrettyNumber(all[key].toString())}</b>
         </Descriptions.Item>
     )), [ all ]);
 
@@ -46,7 +45,7 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
         </>
     );
 
-    const percentWinsRender = () => <h1>{_.isNaN((wins / battles * 100)) ? 0 : (wins / battles * 100).toFixed(2)}%</h1>;
+    const percentWinsRender = () => <h1>{Number.isNaN((wins / battles * 100)) ? 0 : (wins / battles * 100).toFixed(2)}%</h1>;
 
     return (
         <Spin spinning={isFetching}>

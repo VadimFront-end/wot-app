@@ -1,4 +1,4 @@
-const descriptionPattern: { [key: string]: string } = {
+const descriptionPattern: Record<string, string> = {
     avg_damage_assisted: 'Средний урон, нанесённый с вашей помощью. Значение считается с версии игры 8.8.',
     avg_damage_assisted_radio: 'Средний урон по вашим разведданным. Значение считается с версии игры 8.8.',
     avg_damage_assisted_track: 'Средний урон после вашего попадания, сбившего гусеницу. Значение считается с версии игры 8.8.',
