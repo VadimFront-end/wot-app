@@ -14,10 +14,10 @@ export const achievementsInfoApi = createApi({
     reducerPath: 'achievementsInfo',
     baseQuery,
     endpoints: build => ({
-        getAchievementsInfo: build.query<IAchievementsData, {}>({
-            query: data => ({
+        getAchievementsInfo: build.query<IAchievementsData, undefined>({
+            query: () => ({
                 url: 'encyclopedia/achievements/',
-                params: dataWithAccountId(data),
+                params: dataWithAccountId({}),
             }),
             keepUnusedDataFor: 0,
         }),

@@ -4,7 +4,7 @@ import { Table } from 'antd/es';
 import { ColumnsType, TablePaginationConfig } from 'antd/es/table/interface';
 
 interface ITableData {
-    dataSource: Record<string, any>[];
+    dataSource: Record<string, unknown>[];
     columns: ColumnsType<Record<string, any>>;
     isFetching?: boolean;
     onChangeTable?: (pagination: TablePaginationConfig) => void;

@@ -25,7 +25,7 @@ const columns = [
 ];
 
 const AchievementsInfo: React.FC = () => {
-    const { data: achievementsInfo, isFetching } = useGetAchievementsInfoQuery({});
+    const { data: achievementsInfo, isFetching } = useGetAchievementsInfoQuery(undefined);
 
     const dataSource =
         Object.values(achievementsInfo?.data || {})

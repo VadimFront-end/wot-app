@@ -1,4 +1,4 @@
-export const getPrettyNumber = (number: string = '', result = '', index = number.length): string => {
+export const getPrettyNumber = (number = '', result = '', index = number.length): string => {
     if (index - 3 < 0) {
         return number.substring(0, index) + ' ' + result.trim() + (number.indexOf('.') === -1 ? '' : number.substring(number.indexOf('.'), number.length));
     }

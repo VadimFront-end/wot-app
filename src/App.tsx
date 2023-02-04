@@ -104,6 +104,6 @@ const App: React.FC = () => {
             </Layout>
         </Layout>
     );
-}
+};
 
 export default App;
