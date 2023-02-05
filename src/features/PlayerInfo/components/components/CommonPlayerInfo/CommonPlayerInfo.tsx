@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../../../../app/hooks';
 import { getPrettyNumber } from '../../../../../app/helpers';
 
 interface IProps {
-    playerId: string,
+    playerId: string;
 }
 
 const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
@@ -24,17 +24,17 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
         if (accountInfo) {
             dispatch(getAccountName(accountInfo?.data?.[playerId || 0]?.nickname));
         }
-    }, [ accountInfo ]);
+    }, [accountInfo]);
 
-    const accountInfoRender = useCallback(() => Object.entries(descriptionPattern).map(([ key, item ]) => (
-        <Descriptions.Item
-            contentStyle={{ whiteSpace: 'nowrap', background: 'white' }}
-            label={item}
-            key={key}
-        >
-            <b>{key.includes('tank_id') ? <TankCell tankId={all[key]} /> : getPrettyNumber(all[key].toString())}</b>
-        </Descriptions.Item>
-    )), [ all ]);
+    const accountInfoRender = useCallback(
+        () =>
+            Object.entries(descriptionPattern).map(([key, item]) => (
+                <Descriptions.Item contentStyle={{ whiteSpace: 'nowrap', background: 'white' }} label={item} key={key}>
+                    <b>{key.includes('tank_id') ? <TankCell tankId={all[key]} /> : getPrettyNumber(all[key].toString())}</b>
+                </Descriptions.Item>
+            )),
+        [all]
+    );
 
     const statisticTooltipTitle = (
         <>
@@ -45,7 +45,7 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
         </>
     );
 
-    const percentWinsRender = () => <h1>{Number.isNaN((wins / battles * 100)) ? 0 : (wins / battles * 100).toFixed(2)}%</h1>;
+    const percentWinsRender = () => <h1>{Number.isNaN((wins / battles) * 100) ? 0 : ((wins / battles) * 100).toFixed(2)}%</h1>;
 
     return (
         <Spin spinning={isFetching}>
@@ -54,10 +54,10 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
                     <Progress
                         type="dashboard"
                         strokeColor="Crimson"
-                        gapDegree={draws / battles * 100 || 0}
-                        percent={(wins + losses) / battles * 100}
+                        gapDegree={(draws / battles) * 100 || 0}
+                        percent={((wins + losses) / battles) * 100}
                         format={() => <Spin spinning={isFetching}>{percentWinsRender()}</Spin>}
-                        success={{ percent: wins / battles * 100 }}
+                        success={{ percent: (wins / battles) * 100 }}
                     />
                 </Tooltip>
             </div>

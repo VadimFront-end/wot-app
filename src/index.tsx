@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import { ConfigProvider } from 'antd';
 import ruRu from 'antd/lib/locale/ru_RU';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 import { store } from './app/store';
 import App from './App';

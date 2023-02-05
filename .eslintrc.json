@@ -21,8 +21,15 @@
     ],
     "rules": {
         "no-empty-function": "off",
-        "@typescript-eslint/no-empty-function": "error",
+        "@typescript-eslint/no-empty-function": "off",
         "semi": [ "error", "always" ],
-        "quotes": [ "error", "single" ]
+        "quotes": [ "error", "single" ],
+        "comma-dangle": [
+            "error", {
+                "arrays": "always-multiline",
+                "objects": "always-multiline"
+            }
+        ],
+        "array-bracket-spacing": [ "error", "always" ]
     }
 }

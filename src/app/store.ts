@@ -6,12 +6,7 @@ import { tanksInfoApi } from '../features/TanksInfo/tanksInfoApi';
 import { tankCardApi } from '../features/TankCard/tanksCardApi';
 import { achievementsInfoApi } from '../features/AchievementsInfo/achievementsInfoApi';
 
-const Middlewares = [
-    accountListApi.middleware,
-    tanksInfoApi.middleware,
-    tankCardApi.middleware,
-    achievementsInfoApi.middleware,
-];
+const Middlewares = [accountListApi.middleware, tanksInfoApi.middleware, tankCardApi.middleware, achievementsInfoApi.middleware];
 
 export const store = configureStore({
     reducer: {
@@ -21,14 +16,9 @@ export const store = configureStore({
         [achievementsInfoApi.reducerPath]: achievementsInfoApi.reducer,
         playerInfo: playerInfoReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(...Middlewares),
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(...Middlewares),
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
